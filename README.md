@@ -1,86 +1,49 @@
-# 💰 Payout Management System
+# Payout Management System
 
-A sleek, single-page web application for managing a simple payout system for users, such as influencers or creators. This dashboard provides a complete operational console for adding sales, processing payouts, reconciling accounts, and managing withdrawals, all through a clean and responsive user interface.
+This project is a Node.js-based simulation of a payout management system for sales affiliates. It includes logic for tracking sales, processing advance payments, reconciling sales statuses, and handling user withdrawals.
 
-The entire application runs locally with an in-memory data store, requiring no external database.
+The system is available in two forms:
+1.  A command-line interface (CLI) demo to walk through the system's features.
+2.  An Express.js web server that exposes the system's functionality via a REST API.
 
-## ✨ Features
+## Features
 
-- **Modern Ops Dashboard**: A beautiful, responsive UI built with vanilla HTML, CSS, and JavaScript.
-- **Sales Management**: Add sales with associated earnings for any user.
-- **Advance Payouts**: Automatically process a 10% advance on pending sales to make funds immediately available to users.
-- **Sale Reconciliation**: Manually approve or reject sales. Approving releases the remaining funds, while rejecting claws back the advance.
-- **Withdrawal System**: Users can request withdrawals from their available balance.
-- **Robust Withdrawal Logic**:
-  - Includes a 24-hour cooldown period between withdrawals.
-  - Allows operators to mark pending withdrawals as `completed` or `failed`.
-  - Correctly handles failed withdrawals by refunding the user and clearing the cooldown lock.
-- **Full Visibility**: View complete ledgers for all sales and financial transactions in the system.
-- **Data Export**: Download the sales and transaction ledgers as `.csv` files for offline analysis or record-keeping.
+- **User and Sale Management**: Add users and sales with associated earnings.
+- **Advance Payouts**: Automatically process a 10% advance on pending sales.
+- **Sale Reconciliation**: Approve or reject sales, adjusting user balances accordingly.
+- **Withdrawal System**: Allow users to request withdrawals from their balance, with a 24-hour time lock between requests.
+- **Transaction Logging**: Records all financial activities, including advances, reconciliations, and withdrawals.
 
-## 🛠️ Tech Stack
+## Prerequisites
 
-- **Backend**: Node.js, Express.js
-- **Frontend**: HTML5, CSS3, Vanilla JavaScript (ES6+)
-- **Data Store**: In-memory `Map` objects (data resets on server restart).
-- **Development**: `nodemon` for automatic server restarts.
+- [Node.js](https://nodejs.org/) (v14 or later recommended)
+- [npm](https://www.npmjs.com/) (comes with Node.js)
 
-## 🚀 Getting Started
+## Installation
 
-Follow these instructions to get the project running on your local machine.
-
-### Prerequisites
-
-You need to have Node.js (which includes `npm`) installed on your system.
-
-### Installation & Running
-
-1.  **Clone the repository** (or download the source code).
-
-2.  **Navigate to the project directory**:
-    ```sh
-    cd path/to/payout-management-system
-    ```
-
-3.  **Install dependencies**:
-    ```sh
+1.  Clone the repository or download the source code.
+2.  Navigate to the project's root directory in your terminal.
+3.  Install the required dependencies:
+    ```bash
     npm install
     ```
 
-4.  **Start the server**:
-    The project is set up to run with `nodemon`, which will automatically restart the server when you make changes to the code.
-    ```sh
-    npm start
-    ```
+## How to Run
 
-5.  **Open the application**:
-    Open your web browser and go to `http://localhost:3000`. You should see the Payout System dashboard.
+### 1. Command-Line Demo
 
-## ⚙️ How It Works
+To see a step-by-step demonstration of the system's features, run the CLI demo script:
 
-The application is built with a clear separation between the frontend UI, the backend API, and the core business logic.
+```bash
+node index.js
+```
 
-- **`index.html`**: A single HTML file that contains the entire user interface, styling, and client-side JavaScript for making API calls and rendering data.
-- **`index.js`**: An Express.js server that defines all the API endpoints. It acts as the controller, receiving requests from the frontend and calling the appropriate business logic.
-- **`services/PayoutSystem.js`**: The "brain" of the application. This class contains all the business rules and manages the in-memory data (users, sales, transactions). It knows nothing about the web server, ensuring a clean separation of concerns.
+### 2. Web Server (API)
 
-## 📖 API Endpoints
+To start the Express web server and interact with the system via API endpoints, run:
 
-The following API endpoints are defined in `index.js`:
+```bash
+node src/index.js
+```
 
-| Method | Endpoint                             | Description                                            |
-| :----- | :----------------------------------- | :----------------------------------------------------- |
-| `GET`  | `/users/:userId`                     | Get the status and balance of a specific user.         |
-| `GET`  | `/sales`                             | Get a list of all sales in the system.                 |
-| `GET`  | `/transactions`                      | Get a list of all transactions in the system.          |
-| `POST` | `/sales`                             | Add a new sale for a user.                             |
-| `POST` | `/payouts/advance`                   | Trigger the job to process all eligible advance payouts. |
-| `POST` | `/sales/:saleId/reconcile`           | Reconcile a sale as `approved` or `rejected`.          |
-| `POST` | `/users/:userId/withdraw`            | Request a new withdrawal for a user.                   |
-| `POST` | `/transactions/:txId/process`        | Mark a pending withdrawal as `completed` or `failed`.  |
-
----
-
-## ✍️ Author
-
-Made by **Numan Maldar**
+The server will start on `http://localhost:3000`. You can use tools like Postman or `curl` to interact with the API endpoints defined in `src/index.js`.

@@ -113,7 +113,7 @@ app.post('/users/:userId/withdraw', (req, res) => {
     }
 });
 
-// Endpoint to process a withdrawal (the missing piece)
+// Endpoint to process a withdrawal     
 app.post('/transactions/:txId/process', (req, res) => {
     try {
         const { txId } = req.params;

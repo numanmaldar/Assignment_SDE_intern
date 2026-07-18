@@ -41,25 +41,25 @@
         }
 
         /* 2. CSS — put in your stylesheet */
-#cursor-glow {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  background: radial-gradient(
-    100px circle at var(--x, 50%) var(--y, 50%),
-    rgba(201, 151, 62, 0.16),
-    rgba(63, 122, 83, 0.08) 35%,
-    transparent 65%
-  );
-}
-#cursor-glow.active { opacity: 1; }
+        #cursor-glow {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        background: radial-gradient(
+        100px circle at var(--x, 50%) var(--y, 50%),
+        rgba(201, 151, 62, 0.16),
+        rgba(63, 122, 83, 0.08) 35%,
+        transparent 65%
+        );
+        }
+        #cursor-glow.active { opacity: 1; }
 
-@media (prefers-reduced-motion: reduce) {
-  #cursor-glow { display: none; }
-}
+        @media (prefers-reduced-motion: reduce) {
+        #cursor-glow { display: none; }
+        }
 
         /* the page itself sits on "ink", the working surface is a paper sheet */
         .sheet {
