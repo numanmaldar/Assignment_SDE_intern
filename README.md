@@ -144,3 +144,11 @@ The server will start on `http://localhost:3000`. You can use tools like Postman
 *   **Idempotency in Advance Payouts**:
     *   **Decision**: The `processAdvancePayouts` function can be run multiple times without causing duplicate payments.
     *   **Trade-off**: This makes the system resilient. If a job fails midway, it can be safely re-run. This is achieved by explicitly checking `sale.advancePaid === 0` and updating it immediately, which is a standard pattern for idempotent operations.
+
+## Demo Video
+
+
+https://github.com/user-attachments/assets/0f46aa82-fd97-4e89-adaf-a7430f117ff7
+
+
+
