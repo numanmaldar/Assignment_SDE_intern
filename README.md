@@ -17,38 +17,25 @@ The system is available in two forms:
 - **Transaction Logging**: Records all financial activities, including advances, reconciliations, and withdrawals.
 The system is designed with a clear separation of concerns, broken down into three main layers:
 
-## Prerequisites
 1.  **Model Layer (`/src/models`)**: Defines the core data structures (entities) of the system: `User`, `Sale`, and `Transaction`. These classes encapsulate the properties and state of each entity.
 2.  **Service Layer (`/src/services`)**: Contains the `PayoutSystem.js` class, which orchestrates all business logic. It acts as a single source of truth for all operations, ensuring that rules are applied consistently. It manages the state of all entities in-memory.
 3.  **API/Interface Layer**:
     *   **Web API (`/src/index.js`)**: An Express.js server that exposes the service layer's functionality through a set of RESTful API endpoints. This allows external clients to interact with the system.
     *   **CLI Demo (`/index.js`)**: A command-line script that directly uses the `PayoutSystem` service to demonstrate the core features in a step-by-step, easy-to-follow manner.
 
-- Node.js (v14 or later recommended)
-- npm (comes with Node.js)
 This layered architecture makes the system modular, easier to test, and maintain.
 
-## Installation
 ## 2. Database Schema and Relationships
 
-1.  Clone the repository or download the source code.
-2.  Navigate to the project's root directory in your terminal.
-3.  Install the required dependencies:
-    ```bash
-    npm install
-    ```
 For this implementation, the database is simulated in-memory using JavaScript `Map` objects within the `PayoutSystem` class. This approach is chosen for simplicity and to focus on the business logic, as per the LLD focus of the assignment.
 
-## How to Run
 ### Entities (Schema)
 
-### 1. Command-Line Demo
 *   **User**:
     *   `userId` (String, Primary Key): Unique identifier for the user.
     *   `balance` (Number): The user's current withdrawable amount.
     *   `lastWithdrawalTime` (Date): Timestamp of the user's last withdrawal request, used for the 24-hour lock.
 
-To see a step-by-step demonstration of the system's features, run the CLI demo script:
 *   **Sale**:
     *   `saleId` (String, Primary Key): Unique identifier for the sale.
     *   `userId` (String, Foreign Key): The user who made the sale.
@@ -57,9 +44,6 @@ To see a step-by-step demonstration of the system's features, run the CLI demo s
     *   `status` (String): The current status (`pending`, `approved`, `rejected`).
     *   `advancePaid` (Number): The amount paid as an advance for this sale.
 
-```bash
-node index.js
-```
 *   **Transaction**:
     *   `txId` (String, Primary Key): Unique identifier for the transaction.
     *   `userId` (String, Foreign Key): The user involved in the transaction.
@@ -68,20 +52,14 @@ node index.js
     *   `status` (String): The status of the transaction (`pending`, `completed`, `failed`).
     *   `timestamp` (Date): When the transaction was created.
 
-### 2. Web Server (API)
 ### Relationships
 
-To start the Express web server and interact with the system via API endpoints, run:
 *   A `User` can have many `Sales` and many `Transactions`.
 *   A `Sale` belongs to one `User`.
 *   A `Transaction` belongs to one `User`.
 
-```bash
-node src/index.js
-```
 ## 3. Class Design
 
-The server will start on `http://localhost:3000`. You can use tools like Postman or `curl` to interact with the API endpoints defined in `src/index.js`.
 The object-oriented approach is implemented through the following classes:
 
 *   **`User(userId)`**: Represents an affiliate. It is created automatically when a new `userId` is encountered.
@@ -151,7 +129,7 @@ To start the Express server and interact with the system via API endpoints:
 ```bash
 node src/index.js
 ```
-The server will start on `http://localhost:3000`.
+The server will start on `http://localhost:3000`. You can use tools like Postman or `curl` to interact with the API endpoints defined in `src/index.js`.
 
 ## 7. Key Design Decisions and Trade-offs
 
